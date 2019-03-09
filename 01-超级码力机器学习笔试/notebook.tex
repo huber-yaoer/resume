@@ -1,0 +1,1101 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{super2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \#
+
+超级码力笔试第二题
+
+    \begin{verbatim}
+<img src="./super2.png"  alt="超级码力笔试第二题" />
+\end{verbatim}
+
+    A-\textgreater{}label : P(A,label)/P(A)=num(A,label)/num(A)
+\textgreater{} CONFIDENCE
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}149}]:} \PY{n}{SUPPORT} \PY{o}{=} \PY{l+m+mf}{0.1}
+          \PY{n}{CONFIDENCE} \PY{o}{=} \PY{l+m+mf}{0.7} 
+\end{Verbatim}
+
+
+    \hypertarget{ux7406ux8bba}{%
+\subsection{理论：}\label{ux7406ux8bba}}
+
+Apriori算法原理总结: https://www.cnblogs.com/pinard/p/6293298.html
+
+FP Tree算法原理总结（也称FP Growth算法）:
+https://www.cnblogs.com/pinard/p/6307064.html
+
+Apriori算法： 空间复杂度低，时间复杂度高 FP
+Growth算法：空间复杂度高，时间复杂度低
+
+    \hypertarget{ux641cux96c6ux5f00ux6e90ux5de5ux5177}{%
+\subsection{搜集开源工具：}\label{ux641cux96c6ux5f00ux6e90ux5de5ux5177}}
+
+\hypertarget{pyfpgrowth}{%
+\subsubsection{pyfpgrowth}\label{pyfpgrowth}}
+
+https://github.com/evandempsey/fp-growth
+
+https://fp-growth.readthedocs.io/en/latest/
+
+\hypertarget{pyspark}{%
+\subsubsection{pyspark}\label{pyspark}}
+
+https://www.cnblogs.com/pinard/p/6340162.html
+
+https://spark.apache.org/docs/2.1.1/api/python/pyspark.mllib.html\#pyspark.mllib.fpm.FPGrowth
+
+\hypertarget{ux6ca1ux6709ux96c6ux7fa4ux7528ux5355ux673aux7248ux7684sparkux6216ux865aux62dfux673aux7248ux7684sparkux5728ux8fd9ux513fux90fdux4e0dux80fdux53d1ux6325ux96c6ux7fa4ux7684ux4f18ux52bf}{%
+\subsection{没有集群，用单机版的spark或虚拟机版的spark在这儿都不能发挥集群的优势}\label{ux6ca1ux6709ux96c6ux7fa4ux7528ux5355ux673aux7248ux7684sparkux6216ux865aux62dfux673aux7248ux7684sparkux5728ux8fd9ux513fux90fdux4e0dux80fdux53d1ux6325ux96c6ux7fa4ux7684ux4f18ux52bf}}
+
+\hypertarget{ux8fd8ux662fux53d7ux5230ux5355ux673aux7684ux9650ux5236ux6240ux4ee5ux521dux6b65ux9009ux62e9python3pyfpgrowth}{%
+\subsection{还是受到单机的限制，所以初步选择python3+pyfpgrowth}\label{ux8fd8ux662fux53d7ux5230ux5355ux673aux7684ux9650ux5236ux6240ux4ee5ux521dux6b65ux9009ux62e9python3pyfpgrowth}}
+
+    \hypertarget{fpgrowthux601dux8defux5927ux4f53ux5206ux516dux6b65}{%
+\section{fpgrowth思路大体分六步：}\label{fpgrowthux601dux8defux5927ux4f53ux5206ux516dux6b65}}
+
+\hypertarget{ux89c2ux5bdfux6570ux636eux5bf9ux6570ux636eux9884ux5904ux7406}{%
+\subsubsection{1.观察数据，对数据预处理}\label{ux89c2ux5bdfux6570ux636eux5bf9ux6570ux636eux9884ux5904ux7406}}
+
+\hypertarget{ux5c06ux6570ux636eux8f6cux5316ux4e3apyfpgrowthux63a5ux53d7ux7684ux5f62ux5f0f}{%
+\subsubsection{2.将数据转化为pyfpgrowth接受的形式}\label{ux5c06ux6570ux636eux8f6cux5316ux4e3apyfpgrowthux63a5ux53d7ux7684ux5f62ux5f0f}}
+
+\hypertarget{ux6839ux636eux652fux6301ux5ea6ux751fux6210ux9891ux7e41ux9879ux96c6}{%
+\subsubsection{3.根据支持度生成频繁项集}\label{ux6839ux636eux652fux6301ux5ea6ux751fux6210ux9891ux7e41ux9879ux96c6}}
+
+\hypertarget{ux6839ux636eux7f6eux4fe1ux5ea6ux751fux6210ux89c4ux5219}{%
+\subsubsection{4.根据置信度生成规则}\label{ux6839ux636eux7f6eux4fe1ux5ea6ux751fux6210ux89c4ux5219}}
+
+\hypertarget{ux4eceux89c4ux5219ux4e2dux8fc7ux6ee4ux51faux81eaux5df1ux9700ux8981ux7684ux89c4ux5219}{%
+\subsubsection{5.从规则中过滤出自己需要的规则}\label{ux4eceux89c4ux5219ux4e2dux8fc7ux6ee4ux51faux81eaux5df1ux9700ux8981ux7684ux89c4ux5219}}
+
+\hypertarget{ux89e3ux6790ux89c4ux5219}{%
+\subsubsection{6.解析规则}\label{ux89e3ux6790ux89c4ux5219}}
+
+    \hypertarget{ux7ed3ux679cux5728ux6784ux5efafp-treeux65f6ux5185ux5b58ux7206ux4e86}{%
+\section{结果，在构建FP
+Tree时内存爆了：}\label{ux7ed3ux679cux5728ux6784ux5efafp-treeux65f6ux5185ux5b58ux7206ux4e86}}
+
+\begin{verbatim}
+<img src="./super2_FP.jpg"  alt="超级码力笔试第二题fpgrowth思路结果" />
+\end{verbatim}
+
+\hypertarget{ux60f3ux60f3ux4e5fux5bf9ux7279ux5f81ux4e4bux95f4ux8981ux5404ux79cdux7ec4ux5408nux7ea7ux522bux7a7aux95f4ux590dux6742ux5ea6}{%
+\subsubsection{想想也对，特征之间要各种组合，n!级别空间复杂度：}\label{ux60f3ux60f3ux4e5fux5bf9ux7279ux5f81ux4e4bux95f4ux8981ux5404ux79cdux7ec4ux5408nux7ea7ux522bux7a7aux95f4ux590dux6742ux5ea6}}
+
+    \hypertarget{ux4e3aux4e86ux4f18ux5316ux60f3ux65b9ux8bbeux6cd5ux51cfux5c0ffp-treeux600eux4e48ux51cf}{%
+\subsection{为了优化，想方设法减小FP
+Tree，怎么减？}\label{ux4e3aux4e86ux4f18ux5316ux60f3ux65b9ux8bbeux6cd5ux51cfux5c0ffp-treeux600eux4e48ux51cf}}
+
+\hypertarget{ux4e0dux80fdux51cfux6837ux672cux4f1aux5bfcux81f4ux7ed3ux679cux4e0dux51c6ux786e}{%
+\paragraph{不能减样本，会导致结果不准确。}\label{ux4e0dux80fdux51cfux6837ux672cux4f1aux5bfcux81f4ux7ed3ux679cux4e0dux51c6ux786e}}
+
+\hypertarget{ux53eaux80fdux51cfux7279ux5f81ux6839ux636eux652fux6301ux5ea6ux548cux7f6eux4fe1ux5ea6ux6761ux4ef6ux51cfux4e86ux7279ux5f81ux8fd8ux662fux4e0dux884cux5185ux5b58ux4f7fux7528ux7387ux4f1aux6162ux6162ux5230100}{%
+\paragraph{只能减特征，根据支持度和置信度条件减了特征，还是不行，内存使用率会慢慢到100\%。。。。。}\label{ux53eaux80fdux51cfux7279ux5f81ux6839ux636eux652fux6301ux5ea6ux548cux7f6eux4fe1ux5ea6ux6761ux4ef6ux51cfux4e86ux7279ux5f81ux8fd8ux662fux4e0dux884cux5185ux5b58ux4f7fux7528ux7387ux4f1aux6162ux6162ux5230100}}
+
+    \hypertarget{ux518dux5ba1ux9898ux53d1ux73b0ruleux5de6ux4fa7ux53eaux9700ux8981ux5c11ux4e8eux7b49ux4e8eux4e24ux9879ux624bux5199ux7b97ux6cd5ux4ee3ux7801ux884cux6570ux4e0dux4f1aux5f88ux591a}{%
+\subsection{再审题，发现rule左侧只需要少于等于两项，手写算法，代码行数不会很多。}\label{ux518dux5ba1ux9898ux53d1ux73b0ruleux5de6ux4fa7ux53eaux9700ux8981ux5c11ux4e8eux7b49ux4e8eux4e24ux9879ux624bux5199ux7b97ux6cd5ux4ee3ux7801ux884cux6570ux4e0dux4f1aux5f88ux591a}}
+
+\hypertarget{ux6240ux4ee5ux5e72ux8106ux8f6cux6362ux4e3aaprioriux7b97ux6cd5ux601dux8def}{%
+\subsection{所以干脆转换为Apriori算法思路：}\label{ux6240ux4ee5ux5e72ux8106ux8f6cux6362ux4e3aaprioriux7b97ux6cd5ux601dux8def}}
+
+    \hypertarget{aprioriux601dux8defux5927ux4f53ux5206ux4e09ux6b65}{%
+\section{Apriori思路大体分三步：}\label{aprioriux601dux8defux5927ux4f53ux5206ux4e09ux6b65}}
+
+\hypertarget{ux89c2ux5bdfux6570ux636eux5bf9ux6570ux636eux9884ux5904ux7406}{%
+\subsubsection{1.观察数据，对数据预处理}\label{ux89c2ux5bdfux6570ux636eux5bf9ux6570ux636eux9884ux5904ux7406}}
+
+\hypertarget{ux5bf9ux4e8ea-label-ux6839ux636eux652fux6301ux5ea6ux548cux7f6eux4fe1ux5ea6ux6761ux4ef6ux5220ux9664dataframeux4e2dux4e00ux90e8ux5206ux7279ux5f81}{%
+\subsubsection{2.对于A-\textgreater{}Label:
+根据支持度和置信度条件删除dataframe中一部分特征}\label{ux5bf9ux4e8ea-label-ux6839ux636eux652fux6301ux5ea6ux548cux7f6eux4fe1ux5ea6ux6761ux4ef6ux5220ux9664dataframeux4e2dux4e00ux90e8ux5206ux7279ux5f81}}
+
+\hypertarget{ux5bf9ux4e8eab-label-ux6839ux636eux652fux6301ux5ea6ux548cux7f6eux4fe1ux5ea6ux6761ux4ef6ux76f4ux63a5ux5f97ux51faux7ed3ux679c}{%
+\subsubsection{3.对于AB-\textgreater{}Label:
+根据支持度和置信度条件，直接得出结果}\label{ux5bf9ux4e8eab-label-ux6839ux636eux652fux6301ux5ea6ux548cux7f6eux4fe1ux5ea6ux6761ux4ef6ux76f4ux63a5ux5f97ux51faux7ed3ux679c}}
+
+    \hypertarget{ux89c2ux5bdfux6570ux636eux89c2ux5bdfux6570ux636eux5bf9ux6570ux636eux9884ux5904ux7406}{%
+\subsection{观察数据，观察数据，对数据预处理：}\label{ux89c2ux5bdfux6570ux636eux89c2ux5bdfux6570ux636eux5bf9ux6570ux636eux9884ux5904ux7406}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}150}]:} \PY{c+c1}{\PYZsh{}读数据}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd} 
+          \PY{c+c1}{\PYZsh{}df=pd.read\PYZus{}csv(r\PYZsq{}/home/yzh/data/Test2\PYZus{}Data.csv\PYZsq{}) }
+          \PY{n}{df}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Test2\PYZus{}Data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+          \PY{c+c1}{\PYZsh{}df=df.sample(frac=0.5, replace=False)\PYZsh{}replace=True时为有放回抽样}
+          \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}150}]:}    VTYPE\_1  VTYPE\_2  VTYPE\_3  VTYPE\_4  VTYPE\_5  VSEX\_-  VSEX\_F  VSEX\_M  \textbackslash{}
+          0        0        1        0        0        0       0       1       0   
+          1        0        0        1        0        0       0       0       1   
+          2        0        1        0        0        0       0       0       1   
+          3        0        1        0        0        0       0       0       1   
+          4        0        1        0        0        0       0       1       0   
+          
+             VAGE\_1  VAGE\_2  {\ldots}    LIGHTING\_B  LIGHTING\_C  LIGHTING\_D  LIGHTING\_E  \textbackslash{}
+          0       1       0  {\ldots}             0           0           0           0   
+          1       0       0  {\ldots}             0           0           0           0   
+          2       0       0  {\ldots}             0           0           0           0   
+          3       0       0  {\ldots}             0           0           0           0   
+          4       1       0  {\ldots}             0           1           0           0   
+          
+             RIGHTWAY\_-  RIGHTWAY\_A  RIGHTWAY\_B  RIGHTWAY\_C  RIGHTWAY\_D  Label  
+          0           0           1           0           0           0  False  
+          1           0           1           0           0           0   True  
+          2           0           1           0           0           0  False  
+          3           0           1           0           0           0  False  
+          4           0           1           0           0           0  False  
+          
+          [5 rows x 671 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}151}]:} \PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}151}]:}            VTYPE\_1      VTYPE\_2      VTYPE\_3      VTYPE\_4  VTYPE\_5  \textbackslash{}
+          count  1200.000000  1200.000000  1200.000000  1200.000000   1200.0   
+          mean      0.235833     0.582500     0.161667     0.020000      0.0   
+          std       0.424696     0.493352     0.368298     0.140058      0.0   
+          min       0.000000     0.000000     0.000000     0.000000      0.0   
+          25\%       0.000000     0.000000     0.000000     0.000000      0.0   
+          50\%       0.000000     1.000000     0.000000     0.000000      0.0   
+          75\%       0.000000     1.000000     0.000000     0.000000      0.0   
+          max       1.000000     1.000000     1.000000     1.000000      0.0   
+          
+                      VSEX\_-       VSEX\_F       VSEX\_M       VAGE\_1       VAGE\_2  \textbackslash{}
+          count  1200.000000  1200.000000  1200.000000  1200.000000  1200.000000   
+          mean      0.009167     0.395833     0.595000     0.245000     0.238333   
+          std       0.095343     0.489233     0.491097     0.430267     0.426242   
+          min       0.000000     0.000000     0.000000     0.000000     0.000000   
+          25\%       0.000000     0.000000     0.000000     0.000000     0.000000   
+          50\%       0.000000     0.000000     1.000000     0.000000     0.000000   
+          75\%       0.000000     1.000000     1.000000     0.000000     0.000000   
+          max       1.000000     1.000000     1.000000     1.000000     1.000000   
+          
+                    {\ldots}        LIGHTING\_A   LIGHTING\_B   LIGHTING\_C   LIGHTING\_D  \textbackslash{}
+          count     {\ldots}       1200.000000  1200.000000  1200.000000  1200.000000   
+          mean      {\ldots}          0.547500     0.028333     0.340000     0.074167   
+          std       {\ldots}          0.497946     0.165993     0.473906     0.262151   
+          min       {\ldots}          0.000000     0.000000     0.000000     0.000000   
+          25\%       {\ldots}          0.000000     0.000000     0.000000     0.000000   
+          50\%       {\ldots}          1.000000     0.000000     0.000000     0.000000   
+          75\%       {\ldots}          1.000000     0.000000     1.000000     0.000000   
+          max       {\ldots}          1.000000     1.000000     1.000000     1.000000   
+          
+                  LIGHTING\_E   RIGHTWAY\_-   RIGHTWAY\_A   RIGHTWAY\_B   RIGHTWAY\_C  \textbackslash{}
+          count  1200.000000  1200.000000  1200.000000  1200.000000  1200.000000   
+          mean      0.007500     0.002500     0.390833     0.001667     0.000833   
+          std       0.086313     0.049958     0.488141     0.040808     0.028868   
+          min       0.000000     0.000000     0.000000     0.000000     0.000000   
+          25\%       0.000000     0.000000     0.000000     0.000000     0.000000   
+          50\%       0.000000     0.000000     0.000000     0.000000     0.000000   
+          75\%       0.000000     0.000000     1.000000     0.000000     0.000000   
+          max       1.000000     1.000000     1.000000     1.000000     1.000000   
+          
+                  RIGHTWAY\_D  
+          count  1200.000000  
+          mean      0.604167  
+          std       0.489233  
+          min       0.000000  
+          25\%       0.000000  
+          50\%       1.000000  
+          75\%       1.000000  
+          max       1.000000  
+          
+          [8 rows x 670 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}152}]:} \PY{c+c1}{\PYZsh{}判断是否有缺失值}
+          \PY{c+c1}{\PYZsh{}df.iloc[1:3,1] = np.nan}
+          \PY{n+nb}{print}\PY{p}{(}\PY{k+kc}{True} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+False
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}153}]:} \PY{c+c1}{\PYZsh{}Lable列布尔转int}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}154}]:} \PY{n}{df}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}154}]:} (1200, 671)
+\end{Verbatim}
+            
+    \hypertarget{ux4e0bux4e24ux4e2acellux662fux4e3aux4e86ux6478ux7d22ux4e00ux4e0bpandasux53efux8fd0ux884cux4e0dux5f71ux54cdux6316ux6398ux4e3bux5e72}{%
+\subsubsection{下两个cell是为了摸索一下pandas，可运行，不影响挖掘主干：}\label{ux4e0bux4e24ux4e2acellux662fux4e3aux4e86ux6478ux7d22ux4e00ux4e0bpandasux53efux8fd0ux884cux4e0dux5f71ux54cdux6316ux6398ux4e3bux5e72}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}155}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VTYPE\PYZus{}5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VTYPE\PYZus{}5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VTYPE\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{2} \PY{o+ow}{in} \PY{p}{(}\PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}是否存在Label为1，VTYPE\PYZus{}5也为1}
+          \PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Label
+0    600
+1    600
+Name: Label, dtype: int64
+VTYPE\_5
+0    1200
+Name: VTYPE\_5, dtype: int64
+
+<class 'pandas.core.series.Series'>
+600
+
+MultiIndex(levels=[[0, 1], [0, 1]],
+           labels=[[0, 1, 1], [0, 0, 1]],
+           names=['Label', 'VTYPE\_1'])
+
+FrozenNDArray([0, 1, 2], dtype='int8')
+True
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}155}]:} Label  VTYPE\_1
+          0      0          600
+          1      0          317
+                 1          283
+          Name: Label, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}156}]:} \PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VTYPE\PYZus{}5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{2} \PY{o+ow}{in} \PY{p}{(}\PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+MultiIndex(levels=[[0, 1], [0]],
+           labels=[[0, 1], [0, 0]],
+           names=['Label', 'VTYPE\_5'])
+FrozenNDArray([0, 1], dtype='int8')
+False
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}156}]:} Label  VTYPE\_5
+          0      0          600
+          1      0          600
+          Name: Label, dtype: int64
+\end{Verbatim}
+            
+    \hypertarget{ux5bf9ux4e8ea-label-ux6839ux636eux652fux6301ux5ea6ux548cux7f6eux4fe1ux5ea6ux6761ux4ef6ux5220ux9664ux4e00ux90e8ux5206ux7279ux5f81}{%
+\subsection{对于A-\textgreater{}Label:
+根据支持度和置信度条件删除一部分特征}\label{ux5bf9ux4e8ea-label-ux6839ux636eux652fux6301ux5ea6ux548cux7f6eux4fe1ux5ea6ux6761ux4ef6ux5220ux9664ux4e00ux90e8ux5206ux7279ux5f81}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}157}]:} \PY{n}{list\PYZus{}dfcolname} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}SUPPORT:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{SUPPORT}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+          \PY{n}{n\PYZus{}A} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VTYPE\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{n\PYZus{}A}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} print(1 in n\PYZus{}A.index)}
+          \PY{c+c1}{\PYZsh{} n\PYZus{}A = df[\PYZsq{}Label\PYZsq{}].groupby(df[\PYZsq{}VTYPE\PYZus{}5\PYZsq{}]).count()}
+          \PY{c+c1}{\PYZsh{} print(1 in n\PYZus{}A.index)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+              \PY{n}{n\PYZus{}A} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{list\PYZus{}dfcolname}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+              \PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{list\PYZus{}dfcolname}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+              \PY{k}{if} \PY{l+m+mi}{1} \PY{o+ow}{in} \PY{n}{n\PYZus{}A}\PY{o}{.}\PY{n}{index}\PY{p}{:}
+                  \PY{c+c1}{\PYZsh{}对于A\PYZhy{}\PYZgt{}Label:  根据支持度和置信度条件删除一部分特征}
+                  \PY{k}{if} \PY{n}{n\PYZus{}A}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{SUPPORT}\PY{p}{:}
+                      \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{n}{list\PYZus{}dfcolname}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{k}{if} \PY{l+m+mi}{2} \PY{o+ow}{in} \PY{p}{(}\PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{}是否存在Label为1，A也为1}
+                          \PY{k}{if} \PY{n}{n\PYZus{}A\PYZus{}and\PYZus{}label}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{n}{n\PYZus{}A}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{CONFIDENCE}\PY{p}{:}\PY{c+c1}{\PYZsh{}num(A,label)/num(A) \PYZlt{} CONFIDENCE:}
+                              \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{n}{list\PYZus{}dfcolname}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{c+c1}{\PYZsh{}特征全为零，删除}
+                  \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{n}{list\PYZus{}dfcolname}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{)}                  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+n\_SUPPORT: 120.0
+
+VTYPE\_1
+0    917
+1    283
+Name: Label, dtype: int64
+(1200, 33)
+
+    \end{Verbatim}
+
+    \hypertarget{ux63a5ux4e0bux6765ux627eux51faux89c4ux5219ux5de6ux4fa7ux4e24ux9879ux7684ux60c5ux51b5ux4ea4ux53c9ux7ec4ux5408ux540eux603bux7684ux5224ux65adux6b21ux6570ux4e3a-32ux7684ux9636ux4e5832}{%
+\subsection{接下来找出规则左侧两项的情况，交叉组合后总的判断次数为
+32的阶乘：32！}\label{ux63a5ux4e0bux6765ux627eux51faux89c4ux5219ux5de6ux4fa7ux4e24ux9879ux7684ux60c5ux51b5ux4ea4ux53c9ux7ec4ux5408ux540eux603bux7684ux5224ux65adux6b21ux6570ux4e3a-32ux7684ux9636ux4e5832}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}158}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}组合AB特征}
+          \PY{n}{list\PYZus{}A\PYZus{}B} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{A} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+              \PY{k}{for} \PY{n}{B} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+                  \PY{n}{n\PYZus{}AB} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{A}\PY{p}{]}\PY{p}{,}\PY{n}{df}\PY{p}{[}\PY{n}{B}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+                  \PY{n}{n\PYZus{}AB\PYZus{}and\PYZus{}label} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{df}\PY{p}{[}\PY{n}{A}\PY{p}{]}\PY{p}{,}\PY{n}{df}\PY{p}{[}\PY{n}{B}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+                  
+                  \PY{k}{if} \PY{l+m+mi}{2} \PY{o+ow}{in} \PY{p}{(}\PY{n}{n\PYZus{}AB}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{n\PYZus{}AB}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{}是否存在A为1，B也为1}
+                      \PY{k}{if} \PY{n}{n\PYZus{}AB}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{SUPPORT}\PY{p}{:}  \PY{c+c1}{\PYZsh{}AB满足支持度}
+                           \PY{c+c1}{\PYZsh{}是否存在Label为1，A也为1, B也为1， 即A,B,Label共存}
+                          \PY{k}{if} \PY{l+m+mi}{3} \PY{o+ow}{in} \PY{p}{(}\PY{n}{n\PYZus{}AB\PYZus{}and\PYZus{}label}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{n\PYZus{}AB\PYZus{}and\PYZus{}label}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+}\PY{n}{n\PYZus{}AB\PYZus{}and\PYZus{}label}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{:} 
+                              \PY{k}{if} \PY{n}{n\PYZus{}AB\PYZus{}and\PYZus{}label}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{n}{n\PYZus{}AB}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{CONFIDENCE}\PY{p}{:}\PY{c+c1}{\PYZsh{}num(A,B,label)/num(A,B) \PYZgt{} CONFIDENCE(满足置信度)}
+                                  \PY{k}{if} \PY{n}{A} \PY{o}{==} \PY{n}{B}\PY{p}{:}
+                                      \PY{n}{list\PYZus{}A\PYZus{}B}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{A}\PY{p}{)} 
+                                  \PY{k}{else}\PY{p}{:}
+                                      \PY{n}{list\PYZus{}A\PYZus{}B}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{\PYZob{}}\PY{n}{A}\PY{p}{,}\PY{n}{B}\PY{p}{\PYZcb{}}\PY{p}{)}    
+          
+          \PY{n}{list\PYZus{}A\PYZus{}B}                      
+          \PY{c+c1}{\PYZsh{} print(n\PYZus{}AB\PYZus{}and\PYZus{}label.index)}
+          \PY{c+c1}{\PYZsh{} n\PYZus{}AB\PYZus{}and\PYZus{}label  }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['VTYPE\_1', 'VTYPE\_3', 'VSEAT\_1', 'VSEAT\_9', 'VSAFETY1\_-', 'VSAFETY1\_L', 'VSAFETY2\_-', 'VEJECTED\_1', 'VEJECTED\_3', 'PTYPE\_2', 'PAGE\_6', 'PSOBER\_B', 'PDRUG\_E', 'PSAFETY1\_-', 'PSAFETY1\_P', 'PSAFETY2\_-', 'INSURED\_N', 'INSURED\_O', 'CELL\_-', 'PVIOLCOD\_ ', 'OAF1\_A', 'MOVEMENT\_-', 'VEHYEAR\_2012', 'VEHMAKE\_-', 'VEHTYPE\_N', 'CHPTYPE1\_60', 'TIMECAT\_300', 'CRASHTYP\_E', 'CRASHTYP\_G', 'INVOLVE\_B', 'INVOLVE\_I', 'POP\_9']
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}158}]:} ['VTYPE\_1',
+           \{'VSEAT\_1', 'VTYPE\_1'\},
+           'VTYPE\_3',
+           \{'VSEAT\_9', 'VTYPE\_3'\},
+           \{'VSAFETY1\_-', 'VTYPE\_3'\},
+           \{'VSAFETY2\_-', 'VTYPE\_3'\},
+           \{'VEJECTED\_3', 'VTYPE\_3'\},
+           \{'PTYPE\_2', 'VTYPE\_3'\},
+           \{'PSAFETY1\_-', 'VTYPE\_3'\},
+           \{'PSAFETY2\_-', 'VTYPE\_3'\},
+           \{'INSURED\_O', 'VTYPE\_3'\},
+           \{'VEHYEAR\_2012', 'VTYPE\_3'\},
+           \{'VEHMAKE\_-', 'VTYPE\_3'\},
+           \{'VEHTYPE\_N', 'VTYPE\_3'\},
+           \{'CHPTYPE1\_60', 'VTYPE\_3'\},
+           \{'CRASHTYP\_G', 'VTYPE\_3'\},
+           \{'INVOLVE\_B', 'VTYPE\_3'\},
+           \{'VSEAT\_1', 'VTYPE\_1'\},
+           'VSEAT\_1',
+           \{'VEJECTED\_1', 'VSEAT\_1'\},
+           \{'VSEAT\_9', 'VTYPE\_3'\},
+           'VSEAT\_9',
+           \{'VSAFETY1\_-', 'VSEAT\_9'\},
+           \{'VSAFETY2\_-', 'VSEAT\_9'\},
+           \{'VEJECTED\_3', 'VSEAT\_9'\},
+           \{'PTYPE\_2', 'VSEAT\_9'\},
+           \{'PSAFETY1\_-', 'VSEAT\_9'\},
+           \{'PSAFETY2\_-', 'VSEAT\_9'\},
+           \{'INSURED\_O', 'VSEAT\_9'\},
+           \{'VEHYEAR\_2012', 'VSEAT\_9'\},
+           \{'VEHMAKE\_-', 'VSEAT\_9'\},
+           \{'VEHTYPE\_N', 'VSEAT\_9'\},
+           \{'CHPTYPE1\_60', 'VSEAT\_9'\},
+           \{'CRASHTYP\_G', 'VSEAT\_9'\},
+           \{'INVOLVE\_B', 'VSEAT\_9'\},
+           \{'VSAFETY1\_-', 'VTYPE\_3'\},
+           \{'VSAFETY1\_-', 'VSEAT\_9'\},
+           'VSAFETY1\_-',
+           \{'VSAFETY1\_-', 'VSAFETY2\_-'\},
+           \{'VEJECTED\_3', 'VSAFETY1\_-'\},
+           \{'PTYPE\_2', 'VSAFETY1\_-'\},
+           \{'PSAFETY1\_-', 'VSAFETY1\_-'\},
+           \{'PSAFETY2\_-', 'VSAFETY1\_-'\},
+           \{'INSURED\_O', 'VSAFETY1\_-'\},
+           \{'VEHYEAR\_2012', 'VSAFETY1\_-'\},
+           \{'VEHMAKE\_-', 'VSAFETY1\_-'\},
+           \{'VEHTYPE\_N', 'VSAFETY1\_-'\},
+           \{'CHPTYPE1\_60', 'VSAFETY1\_-'\},
+           \{'CRASHTYP\_G', 'VSAFETY1\_-'\},
+           \{'INVOLVE\_B', 'VSAFETY1\_-'\},
+           'VSAFETY1\_L',
+           \{'VSAFETY2\_-', 'VTYPE\_3'\},
+           \{'VSAFETY2\_-', 'VSEAT\_9'\},
+           \{'VSAFETY1\_-', 'VSAFETY2\_-'\},
+           'VSAFETY2\_-',
+           \{'VEJECTED\_3', 'VSAFETY2\_-'\},
+           \{'PTYPE\_2', 'VSAFETY2\_-'\},
+           \{'PSAFETY1\_-', 'VSAFETY2\_-'\},
+           \{'PSAFETY2\_-', 'VSAFETY2\_-'\},
+           \{'INSURED\_O', 'VSAFETY2\_-'\},
+           \{'VEHYEAR\_2012', 'VSAFETY2\_-'\},
+           \{'VEHMAKE\_-', 'VSAFETY2\_-'\},
+           \{'VEHTYPE\_N', 'VSAFETY2\_-'\},
+           \{'CHPTYPE1\_60', 'VSAFETY2\_-'\},
+           \{'CRASHTYP\_G', 'VSAFETY2\_-'\},
+           \{'INVOLVE\_B', 'VSAFETY2\_-'\},
+           \{'VEJECTED\_1', 'VSEAT\_1'\},
+           'VEJECTED\_1',
+           \{'VEJECTED\_3', 'VTYPE\_3'\},
+           \{'VEJECTED\_3', 'VSEAT\_9'\},
+           \{'VEJECTED\_3', 'VSAFETY1\_-'\},
+           \{'VEJECTED\_3', 'VSAFETY2\_-'\},
+           'VEJECTED\_3',
+           \{'PTYPE\_2', 'VEJECTED\_3'\},
+           \{'PSAFETY1\_-', 'VEJECTED\_3'\},
+           \{'PSAFETY2\_-', 'VEJECTED\_3'\},
+           \{'INSURED\_O', 'VEJECTED\_3'\},
+           \{'VEHYEAR\_2012', 'VEJECTED\_3'\},
+           \{'VEHMAKE\_-', 'VEJECTED\_3'\},
+           \{'VEHTYPE\_N', 'VEJECTED\_3'\},
+           \{'CRASHTYP\_G', 'VEJECTED\_3'\},
+           \{'INVOLVE\_B', 'VEJECTED\_3'\},
+           \{'PTYPE\_2', 'VTYPE\_3'\},
+           \{'PTYPE\_2', 'VSEAT\_9'\},
+           \{'PTYPE\_2', 'VSAFETY1\_-'\},
+           \{'PTYPE\_2', 'VSAFETY2\_-'\},
+           \{'PTYPE\_2', 'VEJECTED\_3'\},
+           'PTYPE\_2',
+           \{'PSAFETY1\_-', 'PTYPE\_2'\},
+           \{'PSAFETY2\_-', 'PTYPE\_2'\},
+           \{'INSURED\_O', 'PTYPE\_2'\},
+           \{'PTYPE\_2', 'VEHYEAR\_2012'\},
+           \{'PTYPE\_2', 'VEHMAKE\_-'\},
+           \{'PTYPE\_2', 'VEHTYPE\_N'\},
+           \{'CHPTYPE1\_60', 'PTYPE\_2'\},
+           \{'CRASHTYP\_G', 'PTYPE\_2'\},
+           \{'INVOLVE\_B', 'PTYPE\_2'\},
+           'PAGE\_6',
+           'PSOBER\_B',
+           'PDRUG\_E',
+           \{'PSAFETY1\_-', 'VTYPE\_3'\},
+           \{'PSAFETY1\_-', 'VSEAT\_9'\},
+           \{'PSAFETY1\_-', 'VSAFETY1\_-'\},
+           \{'PSAFETY1\_-', 'VSAFETY2\_-'\},
+           \{'PSAFETY1\_-', 'VEJECTED\_3'\},
+           \{'PSAFETY1\_-', 'PTYPE\_2'\},
+           'PSAFETY1\_-',
+           \{'PSAFETY1\_-', 'PSAFETY2\_-'\},
+           \{'INSURED\_O', 'PSAFETY1\_-'\},
+           \{'PSAFETY1\_-', 'VEHYEAR\_2012'\},
+           \{'PSAFETY1\_-', 'VEHMAKE\_-'\},
+           \{'PSAFETY1\_-', 'VEHTYPE\_N'\},
+           \{'CHPTYPE1\_60', 'PSAFETY1\_-'\},
+           \{'CRASHTYP\_G', 'PSAFETY1\_-'\},
+           \{'INVOLVE\_B', 'PSAFETY1\_-'\},
+           'PSAFETY1\_P',
+           \{'PSAFETY2\_-', 'VTYPE\_3'\},
+           \{'PSAFETY2\_-', 'VSEAT\_9'\},
+           \{'PSAFETY2\_-', 'VSAFETY1\_-'\},
+           \{'PSAFETY2\_-', 'VSAFETY2\_-'\},
+           \{'PSAFETY2\_-', 'VEJECTED\_3'\},
+           \{'PSAFETY2\_-', 'PTYPE\_2'\},
+           \{'PSAFETY1\_-', 'PSAFETY2\_-'\},
+           'PSAFETY2\_-',
+           \{'INSURED\_O', 'PSAFETY2\_-'\},
+           \{'PSAFETY2\_-', 'VEHYEAR\_2012'\},
+           \{'PSAFETY2\_-', 'VEHMAKE\_-'\},
+           \{'PSAFETY2\_-', 'VEHTYPE\_N'\},
+           \{'CHPTYPE1\_60', 'PSAFETY2\_-'\},
+           \{'CRASHTYP\_G', 'PSAFETY2\_-'\},
+           \{'INVOLVE\_B', 'PSAFETY2\_-'\},
+           'INSURED\_N',
+           \{'INSURED\_O', 'VTYPE\_3'\},
+           \{'INSURED\_O', 'VSEAT\_9'\},
+           \{'INSURED\_O', 'VSAFETY1\_-'\},
+           \{'INSURED\_O', 'VSAFETY2\_-'\},
+           \{'INSURED\_O', 'VEJECTED\_3'\},
+           \{'INSURED\_O', 'PTYPE\_2'\},
+           \{'INSURED\_O', 'PSAFETY1\_-'\},
+           \{'INSURED\_O', 'PSAFETY2\_-'\},
+           'INSURED\_O',
+           \{'INSURED\_O', 'VEHYEAR\_2012'\},
+           \{'INSURED\_O', 'VEHMAKE\_-'\},
+           \{'INSURED\_O', 'VEHTYPE\_N'\},
+           \{'CHPTYPE1\_60', 'INSURED\_O'\},
+           \{'CRASHTYP\_G', 'INSURED\_O'\},
+           \{'INSURED\_O', 'INVOLVE\_B'\},
+           'CELL\_-',
+           'PVIOLCOD\_ ',
+           \{'OAF1\_A', 'PVIOLCOD\_ '\},
+           \{'OAF1\_A', 'PVIOLCOD\_ '\},
+           'OAF1\_A',
+           'MOVEMENT\_-',
+           \{'VEHYEAR\_2012', 'VTYPE\_3'\},
+           \{'VEHYEAR\_2012', 'VSEAT\_9'\},
+           \{'VEHYEAR\_2012', 'VSAFETY1\_-'\},
+           \{'VEHYEAR\_2012', 'VSAFETY2\_-'\},
+           \{'VEHYEAR\_2012', 'VEJECTED\_3'\},
+           \{'PTYPE\_2', 'VEHYEAR\_2012'\},
+           \{'PSAFETY1\_-', 'VEHYEAR\_2012'\},
+           \{'PSAFETY2\_-', 'VEHYEAR\_2012'\},
+           \{'INSURED\_O', 'VEHYEAR\_2012'\},
+           'VEHYEAR\_2012',
+           \{'VEHMAKE\_-', 'VEHYEAR\_2012'\},
+           \{'VEHTYPE\_N', 'VEHYEAR\_2012'\},
+           \{'CHPTYPE1\_60', 'VEHYEAR\_2012'\},
+           \{'CRASHTYP\_G', 'VEHYEAR\_2012'\},
+           \{'INVOLVE\_B', 'VEHYEAR\_2012'\},
+           \{'VEHMAKE\_-', 'VTYPE\_3'\},
+           \{'VEHMAKE\_-', 'VSEAT\_9'\},
+           \{'VEHMAKE\_-', 'VSAFETY1\_-'\},
+           \{'VEHMAKE\_-', 'VSAFETY2\_-'\},
+           \{'VEHMAKE\_-', 'VEJECTED\_3'\},
+           \{'PTYPE\_2', 'VEHMAKE\_-'\},
+           \{'PSAFETY1\_-', 'VEHMAKE\_-'\},
+           \{'PSAFETY2\_-', 'VEHMAKE\_-'\},
+           \{'INSURED\_O', 'VEHMAKE\_-'\},
+           \{'VEHMAKE\_-', 'VEHYEAR\_2012'\},
+           'VEHMAKE\_-',
+           \{'VEHMAKE\_-', 'VEHTYPE\_N'\},
+           \{'CHPTYPE1\_60', 'VEHMAKE\_-'\},
+           \{'CRASHTYP\_G', 'VEHMAKE\_-'\},
+           \{'INVOLVE\_B', 'VEHMAKE\_-'\},
+           \{'VEHTYPE\_N', 'VTYPE\_3'\},
+           \{'VEHTYPE\_N', 'VSEAT\_9'\},
+           \{'VEHTYPE\_N', 'VSAFETY1\_-'\},
+           \{'VEHTYPE\_N', 'VSAFETY2\_-'\},
+           \{'VEHTYPE\_N', 'VEJECTED\_3'\},
+           \{'PTYPE\_2', 'VEHTYPE\_N'\},
+           \{'PSAFETY1\_-', 'VEHTYPE\_N'\},
+           \{'PSAFETY2\_-', 'VEHTYPE\_N'\},
+           \{'INSURED\_O', 'VEHTYPE\_N'\},
+           \{'VEHTYPE\_N', 'VEHYEAR\_2012'\},
+           \{'VEHMAKE\_-', 'VEHTYPE\_N'\},
+           'VEHTYPE\_N',
+           \{'CHPTYPE1\_60', 'VEHTYPE\_N'\},
+           \{'CRASHTYP\_G', 'VEHTYPE\_N'\},
+           \{'INVOLVE\_B', 'VEHTYPE\_N'\},
+           \{'CHPTYPE1\_60', 'VTYPE\_3'\},
+           \{'CHPTYPE1\_60', 'VSEAT\_9'\},
+           \{'CHPTYPE1\_60', 'VSAFETY1\_-'\},
+           \{'CHPTYPE1\_60', 'VSAFETY2\_-'\},
+           \{'CHPTYPE1\_60', 'PTYPE\_2'\},
+           \{'CHPTYPE1\_60', 'PSAFETY1\_-'\},
+           \{'CHPTYPE1\_60', 'PSAFETY2\_-'\},
+           \{'CHPTYPE1\_60', 'INSURED\_O'\},
+           \{'CHPTYPE1\_60', 'VEHYEAR\_2012'\},
+           \{'CHPTYPE1\_60', 'VEHMAKE\_-'\},
+           \{'CHPTYPE1\_60', 'VEHTYPE\_N'\},
+           'CHPTYPE1\_60',
+           \{'CHPTYPE1\_60', 'CRASHTYP\_G'\},
+           \{'CHPTYPE1\_60', 'INVOLVE\_B'\},
+           'TIMECAT\_300',
+           'CRASHTYP\_E',
+           \{'CRASHTYP\_E', 'INVOLVE\_I'\},
+           \{'CRASHTYP\_G', 'VTYPE\_3'\},
+           \{'CRASHTYP\_G', 'VSEAT\_9'\},
+           \{'CRASHTYP\_G', 'VSAFETY1\_-'\},
+           \{'CRASHTYP\_G', 'VSAFETY2\_-'\},
+           \{'CRASHTYP\_G', 'VEJECTED\_3'\},
+           \{'CRASHTYP\_G', 'PTYPE\_2'\},
+           \{'CRASHTYP\_G', 'PSAFETY1\_-'\},
+           \{'CRASHTYP\_G', 'PSAFETY2\_-'\},
+           \{'CRASHTYP\_G', 'INSURED\_O'\},
+           \{'CRASHTYP\_G', 'VEHYEAR\_2012'\},
+           \{'CRASHTYP\_G', 'VEHMAKE\_-'\},
+           \{'CRASHTYP\_G', 'VEHTYPE\_N'\},
+           \{'CHPTYPE1\_60', 'CRASHTYP\_G'\},
+           'CRASHTYP\_G',
+           \{'CRASHTYP\_G', 'INVOLVE\_B'\},
+           \{'INVOLVE\_B', 'VTYPE\_3'\},
+           \{'INVOLVE\_B', 'VSEAT\_9'\},
+           \{'INVOLVE\_B', 'VSAFETY1\_-'\},
+           \{'INVOLVE\_B', 'VSAFETY2\_-'\},
+           \{'INVOLVE\_B', 'VEJECTED\_3'\},
+           \{'INVOLVE\_B', 'PTYPE\_2'\},
+           \{'INVOLVE\_B', 'PSAFETY1\_-'\},
+           \{'INVOLVE\_B', 'PSAFETY2\_-'\},
+           \{'INSURED\_O', 'INVOLVE\_B'\},
+           \{'INVOLVE\_B', 'VEHYEAR\_2012'\},
+           \{'INVOLVE\_B', 'VEHMAKE\_-'\},
+           \{'INVOLVE\_B', 'VEHTYPE\_N'\},
+           \{'CHPTYPE1\_60', 'INVOLVE\_B'\},
+           \{'CRASHTYP\_G', 'INVOLVE\_B'\},
+           'INVOLVE\_B',
+           \{'CRASHTYP\_E', 'INVOLVE\_I'\},
+           'INVOLVE\_I',
+           'POP\_9']
+\end{Verbatim}
+            
+    \hypertarget{ux5217ux8868ux53bbux91cdux4fbfux662fux6700ux7ec8ux7ed3ux679cux4e86}{%
+\subsection{列表去重便是最终结果了}\label{ux5217ux8868ux53bbux91cdux4fbfux662fux6700ux7ec8ux7ed3ux679cux4e86}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}159}]:} \PY{c+c1}{\PYZsh{}list\PYZus{}A\PYZus{}B=list(set(list\PYZus{}A\PYZus{}B))}
+          
+          \PY{n}{result}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{list\PYZus{}A\PYZus{}B}\PY{p}{:}
+              \PY{k}{if} \PY{n}{i} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{result}\PY{p}{:}
+                  \PY{n}{result}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+          \PY{n}{result}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}159}]:} ['VTYPE\_1',
+           \{'VSEAT\_1', 'VTYPE\_1'\},
+           'VTYPE\_3',
+           \{'VSEAT\_9', 'VTYPE\_3'\},
+           \{'VSAFETY1\_-', 'VTYPE\_3'\},
+           \{'VSAFETY2\_-', 'VTYPE\_3'\},
+           \{'VEJECTED\_3', 'VTYPE\_3'\},
+           \{'PTYPE\_2', 'VTYPE\_3'\},
+           \{'PSAFETY1\_-', 'VTYPE\_3'\},
+           \{'PSAFETY2\_-', 'VTYPE\_3'\},
+           \{'INSURED\_O', 'VTYPE\_3'\},
+           \{'VEHYEAR\_2012', 'VTYPE\_3'\},
+           \{'VEHMAKE\_-', 'VTYPE\_3'\},
+           \{'VEHTYPE\_N', 'VTYPE\_3'\},
+           \{'CHPTYPE1\_60', 'VTYPE\_3'\},
+           \{'CRASHTYP\_G', 'VTYPE\_3'\},
+           \{'INVOLVE\_B', 'VTYPE\_3'\},
+           'VSEAT\_1',
+           \{'VEJECTED\_1', 'VSEAT\_1'\},
+           'VSEAT\_9',
+           \{'VSAFETY1\_-', 'VSEAT\_9'\},
+           \{'VSAFETY2\_-', 'VSEAT\_9'\},
+           \{'VEJECTED\_3', 'VSEAT\_9'\},
+           \{'PTYPE\_2', 'VSEAT\_9'\},
+           \{'PSAFETY1\_-', 'VSEAT\_9'\},
+           \{'PSAFETY2\_-', 'VSEAT\_9'\},
+           \{'INSURED\_O', 'VSEAT\_9'\},
+           \{'VEHYEAR\_2012', 'VSEAT\_9'\},
+           \{'VEHMAKE\_-', 'VSEAT\_9'\},
+           \{'VEHTYPE\_N', 'VSEAT\_9'\},
+           \{'CHPTYPE1\_60', 'VSEAT\_9'\},
+           \{'CRASHTYP\_G', 'VSEAT\_9'\},
+           \{'INVOLVE\_B', 'VSEAT\_9'\},
+           'VSAFETY1\_-',
+           \{'VSAFETY1\_-', 'VSAFETY2\_-'\},
+           \{'VEJECTED\_3', 'VSAFETY1\_-'\},
+           \{'PTYPE\_2', 'VSAFETY1\_-'\},
+           \{'PSAFETY1\_-', 'VSAFETY1\_-'\},
+           \{'PSAFETY2\_-', 'VSAFETY1\_-'\},
+           \{'INSURED\_O', 'VSAFETY1\_-'\},
+           \{'VEHYEAR\_2012', 'VSAFETY1\_-'\},
+           \{'VEHMAKE\_-', 'VSAFETY1\_-'\},
+           \{'VEHTYPE\_N', 'VSAFETY1\_-'\},
+           \{'CHPTYPE1\_60', 'VSAFETY1\_-'\},
+           \{'CRASHTYP\_G', 'VSAFETY1\_-'\},
+           \{'INVOLVE\_B', 'VSAFETY1\_-'\},
+           'VSAFETY1\_L',
+           'VSAFETY2\_-',
+           \{'VEJECTED\_3', 'VSAFETY2\_-'\},
+           \{'PTYPE\_2', 'VSAFETY2\_-'\},
+           \{'PSAFETY1\_-', 'VSAFETY2\_-'\},
+           \{'PSAFETY2\_-', 'VSAFETY2\_-'\},
+           \{'INSURED\_O', 'VSAFETY2\_-'\},
+           \{'VEHYEAR\_2012', 'VSAFETY2\_-'\},
+           \{'VEHMAKE\_-', 'VSAFETY2\_-'\},
+           \{'VEHTYPE\_N', 'VSAFETY2\_-'\},
+           \{'CHPTYPE1\_60', 'VSAFETY2\_-'\},
+           \{'CRASHTYP\_G', 'VSAFETY2\_-'\},
+           \{'INVOLVE\_B', 'VSAFETY2\_-'\},
+           'VEJECTED\_1',
+           'VEJECTED\_3',
+           \{'PTYPE\_2', 'VEJECTED\_3'\},
+           \{'PSAFETY1\_-', 'VEJECTED\_3'\},
+           \{'PSAFETY2\_-', 'VEJECTED\_3'\},
+           \{'INSURED\_O', 'VEJECTED\_3'\},
+           \{'VEHYEAR\_2012', 'VEJECTED\_3'\},
+           \{'VEHMAKE\_-', 'VEJECTED\_3'\},
+           \{'VEHTYPE\_N', 'VEJECTED\_3'\},
+           \{'CRASHTYP\_G', 'VEJECTED\_3'\},
+           \{'INVOLVE\_B', 'VEJECTED\_3'\},
+           'PTYPE\_2',
+           \{'PSAFETY1\_-', 'PTYPE\_2'\},
+           \{'PSAFETY2\_-', 'PTYPE\_2'\},
+           \{'INSURED\_O', 'PTYPE\_2'\},
+           \{'PTYPE\_2', 'VEHYEAR\_2012'\},
+           \{'PTYPE\_2', 'VEHMAKE\_-'\},
+           \{'PTYPE\_2', 'VEHTYPE\_N'\},
+           \{'CHPTYPE1\_60', 'PTYPE\_2'\},
+           \{'CRASHTYP\_G', 'PTYPE\_2'\},
+           \{'INVOLVE\_B', 'PTYPE\_2'\},
+           'PAGE\_6',
+           'PSOBER\_B',
+           'PDRUG\_E',
+           'PSAFETY1\_-',
+           \{'PSAFETY1\_-', 'PSAFETY2\_-'\},
+           \{'INSURED\_O', 'PSAFETY1\_-'\},
+           \{'PSAFETY1\_-', 'VEHYEAR\_2012'\},
+           \{'PSAFETY1\_-', 'VEHMAKE\_-'\},
+           \{'PSAFETY1\_-', 'VEHTYPE\_N'\},
+           \{'CHPTYPE1\_60', 'PSAFETY1\_-'\},
+           \{'CRASHTYP\_G', 'PSAFETY1\_-'\},
+           \{'INVOLVE\_B', 'PSAFETY1\_-'\},
+           'PSAFETY1\_P',
+           'PSAFETY2\_-',
+           \{'INSURED\_O', 'PSAFETY2\_-'\},
+           \{'PSAFETY2\_-', 'VEHYEAR\_2012'\},
+           \{'PSAFETY2\_-', 'VEHMAKE\_-'\},
+           \{'PSAFETY2\_-', 'VEHTYPE\_N'\},
+           \{'CHPTYPE1\_60', 'PSAFETY2\_-'\},
+           \{'CRASHTYP\_G', 'PSAFETY2\_-'\},
+           \{'INVOLVE\_B', 'PSAFETY2\_-'\},
+           'INSURED\_N',
+           'INSURED\_O',
+           \{'INSURED\_O', 'VEHYEAR\_2012'\},
+           \{'INSURED\_O', 'VEHMAKE\_-'\},
+           \{'INSURED\_O', 'VEHTYPE\_N'\},
+           \{'CHPTYPE1\_60', 'INSURED\_O'\},
+           \{'CRASHTYP\_G', 'INSURED\_O'\},
+           \{'INSURED\_O', 'INVOLVE\_B'\},
+           'CELL\_-',
+           'PVIOLCOD\_ ',
+           \{'OAF1\_A', 'PVIOLCOD\_ '\},
+           'OAF1\_A',
+           'MOVEMENT\_-',
+           'VEHYEAR\_2012',
+           \{'VEHMAKE\_-', 'VEHYEAR\_2012'\},
+           \{'VEHTYPE\_N', 'VEHYEAR\_2012'\},
+           \{'CHPTYPE1\_60', 'VEHYEAR\_2012'\},
+           \{'CRASHTYP\_G', 'VEHYEAR\_2012'\},
+           \{'INVOLVE\_B', 'VEHYEAR\_2012'\},
+           'VEHMAKE\_-',
+           \{'VEHMAKE\_-', 'VEHTYPE\_N'\},
+           \{'CHPTYPE1\_60', 'VEHMAKE\_-'\},
+           \{'CRASHTYP\_G', 'VEHMAKE\_-'\},
+           \{'INVOLVE\_B', 'VEHMAKE\_-'\},
+           'VEHTYPE\_N',
+           \{'CHPTYPE1\_60', 'VEHTYPE\_N'\},
+           \{'CRASHTYP\_G', 'VEHTYPE\_N'\},
+           \{'INVOLVE\_B', 'VEHTYPE\_N'\},
+           'CHPTYPE1\_60',
+           \{'CHPTYPE1\_60', 'CRASHTYP\_G'\},
+           \{'CHPTYPE1\_60', 'INVOLVE\_B'\},
+           'TIMECAT\_300',
+           'CRASHTYP\_E',
+           \{'CRASHTYP\_E', 'INVOLVE\_I'\},
+           'CRASHTYP\_G',
+           \{'CRASHTYP\_G', 'INVOLVE\_B'\},
+           'INVOLVE\_B',
+           'INVOLVE\_I',
+           'POP\_9']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}160}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} 获取 每行中为1的特征， 收集到列表里， 转化后数据类型对应pyfpgrowth接受类型}
+          \PY{c+c1}{\PYZsh{} dfT = df.T}
+          \PY{c+c1}{\PYZsh{} data = [dfT[(dfT[i]==1)].index.tolist() for i in range(df.shape[0])]}
+          \PY{c+c1}{\PYZsh{} print(data[0])}
+          \PY{c+c1}{\PYZsh{} \PYZsh{}用pyfpgrowth训练}
+          \PY{c+c1}{\PYZsh{} import pyfpgrowth}
+          \PY{c+c1}{\PYZsh{} patterns = pyfpgrowth.find\PYZus{}frequent\PYZus{}patterns(data, df.shape[0] * 0.1)}
+          \PY{c+c1}{\PYZsh{}\PYZsh{} 根据置信度生成规则}
+          \PY{c+c1}{\PYZsh{} rules = pyfpgrowth.generate\PYZus{}association\PYZus{}rules(patterns, 0.7)}
+          \PY{c+c1}{\PYZsh{} rules}
+          \PY{c+c1}{\PYZsh{}\PYZsh{} 从规则中过滤出自己需要的规则}
+          \PY{c+c1}{\PYZsh{}\PYZsh{} 解析规则}
+\end{Verbatim}
+
+
+    \#\# 谢谢您的观看！
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
